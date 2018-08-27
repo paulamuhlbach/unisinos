@@ -1,0 +1,107 @@
+public class BinaryMinHeap {
+	
+	 private int[] data;
+	 private int heapSize;
+
+
+     public BinaryMinHeap(int size) {
+
+           data = new int[size];
+           heapSize = 0;
+
+     }
+
+     public int getMinimum() {
+
+           if (isEmpty()) {
+
+        	   System.out.println("Heap is empty");
+
+           }
+
+                 return data[0];
+
+     }
+
+     public boolean isEmpty() {
+
+           return (heapSize == 0);
+
+     }
+
+     private int getLeftChildIndex(int nodeIndex) {
+
+           return 2 * nodeIndex + 1;
+
+     }
+
+     private int getRightChildIndex(int nodeIndex) {
+
+           return 2 * nodeIndex + 2;
+
+     }
+
+     private int getParentIndex(int nodeIndex) {
+
+           return (nodeIndex - 1) / 2;
+
+     }
+     
+     public void insereValor(int valor) {
+    	 
+    	// int esq = getLeftChildIndex(heapSize);// index filho esquerdo
+    	// int dir = getRightChildIndex(heapSize);// index filho direito
+    	 int pai = getParentIndex(heapSize);// index pai
+    	 
+    	 
+    	 if(isEmpty()) {// se ta vazio, coloca valor no data[0];
+     
+    	 data[0] = valor;
+ 
+    	 }
+    	 
+    	 else if(valor<data[heapSize]){ // se o valor é menor que o valor do heapSize corrente, troca
+    		 int maior = data[heapSize]; 
+    		 data[heapSize] = valor;
+    		 data[heapSize+1] = maior;
+    	 
+    	 }
+    	 else {
+    		 
+    		 if(data[pai]==0)
+    		 data[heapSize] = valor;
+    	 }
+   
+    	 heapSize = heapSize+1;
+    	 
+     }
+     
+     
+
+     public void printHeap() {
+    	  
+    	 for(int i = 0; i< heapSize; i++) {
+    	 System.out.println("["+i+"] "+data[i]);
+    	 System.out.println("o pai desse é "+ data[getParentIndex(i)]);
+    	 System.out.println("o filho esquerdo desse é "+ data[getLeftChildIndex(i)]);
+    	 System.out.println("o filho direito desse é "+ data[getRightChildIndex(i)]);
+    	 System.out.println(" ");
+    	 
+    	 }   
+    	 System.out.println("o heapSize é " +  heapSize);
+      }
+     
+     public static void main(String[] args) {
+ 		BinaryMinHeap b = new BinaryMinHeap(6);  
+
+ 	      b.insereValor(1);
+ 	      b.insereValor(3);
+ 	      b.insereValor(6);
+ 	      b.insereValor(5);
+ 	      b.insereValor(9);
+ 	      b.insereValor(8);
+
+ 	     b.printHeap();
+
+ 	}
+}
